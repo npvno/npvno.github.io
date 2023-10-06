@@ -18,6 +18,9 @@ jobs:
         with:
           python-version: 3.11.0  # Specify your Python version
 
+      - name: Install Dependencies
+        run: pip install instaloader
+
       - name: Run Python Script
         env:
           INSTA_USERNAME: ${{ secrets.INSTA_USERNAME }}
