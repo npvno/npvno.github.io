@@ -1,5 +1,6 @@
 from instaloader import Instaloader, Profile, Post, Hashtag, NodeIterator
 import random
+import os
 
 INSTA_USERNAME = os.environ.get("INSTA_USERNAME")
 INSTA_PASSWORD = os.environ.get("INSTA_PASSWORD")
@@ -55,7 +56,6 @@ print(top_posts_list)
 
 
 # Load the right directory
-import os.path
 directory = './npvno.github.io/'
 html_filename = "index.html"
 html_file_path = os.path.join(directory, html_filename)
