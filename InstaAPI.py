@@ -13,15 +13,10 @@ L = Instaloader()
 
 #LOGIN
 try:
-    L.load_session_from_file(username, "cookies.txt")
-    L.get_stories()
+    L.login(INSTA_USERNAME, INSTA_PASSWORD)
 except:
-    try:
-        L.login(username, password)
-    except:
-        L.load_session(username, {"sessionid": session, "csrftoken": csrf})
-        L.get_stories()
-L.save_session_to_file("cookies.txt")
+    L.load_session(username, {"sessionid": INSTA_SESSION, "csrftoken": INSTA_CSRF})
+    L.get_stories()
 
 
 #Download the list of followers of the page
