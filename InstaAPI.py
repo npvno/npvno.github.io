@@ -16,7 +16,7 @@ L = Instaloader()
 try:
     L.login(INSTA_USERNAME, INSTA_PASSWORD)
 except:
-    L.load_session(username, {"sessionid": INSTA_SESSION, "csrftoken": INSTA_CSRF})
+    L.load_session(INSTA_USERNAME, {"sessionid": INSTA_SESSION, "csrftoken": INSTA_CSRF})
     L.get_stories()
 
 
