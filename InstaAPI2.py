@@ -33,16 +33,16 @@ x="""<h1>Click the Button to Run Script</h1>
   </script>"""
 
 
-# Get the current working directory where the script is running
-current_directory = os.getcwd()
+# Get the path to the script's directory
+script_directory = os.path.dirname(os.path.abspath(__file__))
 
 # Define the filename (index.html)
 html_filename = "index.html"
 
-# Combine the current directory and filename to create the full file path
-html_file_path = os.path.join(current_directory, html_filename)
+# Combine the script's directory and filename to create the full file path
+html_file_path = os.path.join(script_directory, html_filename)
 
-print(f"Current Directory: {current_directory}")
+print(f"Current Directory: {script_directory}")
 print(f"HTML File Path: {html_file_path}")
 
 # Create an HTML file for output
