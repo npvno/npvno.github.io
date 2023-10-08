@@ -73,36 +73,39 @@
 
 <button id="triggerButton">Trigger Workflow</button>
 
+<script type="module">import { Octokit } from "https://esm.sh/@octokit/core";</script>
 <script>
-  // Function to trigger the workflow when the button is clicked
-  function triggerWorkflow() {
-    const token = document.getElementById('tokenInput').value;
-    
-    fetch('/trigger-workflow', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        token: token,
-        eventType: 'run_python_script.yml'
-      })
-    })
+
+function triggerWorkflow() {
+  const token = document.getElementById('tokenInput').value;
+  const owner = 'npvno';
+  const repo = 'npvno.github.io';
+
+  // Create a payload for the repository dispatch event
+  const payload = {
+    event_type: 'button-pressed' // Replace with your event type
+  };
+
+  fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `token ${token}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
     .then(response => {
       if (response.ok) {
-        alert('Workflow triggered successfully.');
+        console.log('Workflow triggered successfully.');
       } else {
-        alert('Failed to trigger the workflow.');
+        console.error('Failed to trigger workflow:', response.statusText);
       }
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('An error occurred while triggering the workflow.');
     });
-  }
-
-  // Attach the click event handler to the button
-  document.getElementById('triggerButton').addEventListener('click', triggerWorkflow);
+}
 </script>
 
 

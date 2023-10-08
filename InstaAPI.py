@@ -65,6 +65,9 @@ button="""
 
 <button id="triggerButton">Trigger Workflow</button>
 
+<script type="module">import { Octokit } from "https://esm.sh/@octokit/core";</script>
+<script>
+
 function triggerWorkflow() {
   const token = document.getElementById('tokenInput').value;
   const owner = 'npvno';
@@ -95,7 +98,7 @@ function triggerWorkflow() {
       console.error('Error:', error);
     });
 }
-
+</script>
 """
 
 
