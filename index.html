@@ -5,6 +5,95 @@
 
 <body>
 
+<h2><a href="https://www.instagram.com/sp_noikon" target="_blank">sp_noikon</a></h2>
+<table style="width:100%"><tr>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CqfthpHrw9_" target="_blank">CqfthpHrw9_</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CqfthpHrw9_/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CqdK1i0LoiB" target="_blank">CqdK1i0LoiB</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CqdK1i0LoiB/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CqCGaGKLfu9" target="_blank">CqCGaGKLfu9</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CqCGaGKLfu9/" ></a></blockquote>
+</td>
+
+</tr></table><hr>
+
+<h2><a href="https://www.instagram.com/caswattyyindriyani82" target="_blank">caswattyyindriyani82</a></h2>
+<table style="width:100%"><tr>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/Ccs4l8kvKZz" target="_blank">Ccs4l8kvKZz</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/Ccs4l8kvKZz/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CYnDBVqL8Or" target="_blank">CYnDBVqL8Or</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CYnDBVqL8Or/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CQtBD8FrNEA" target="_blank">CQtBD8FrNEA</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CQtBD8FrNEA/" ></a></blockquote>
+</td>
+
+</tr></table><hr>
+
+<h2><a href="https://www.instagram.com/tutiazahra02" target="_blank">tutiazahra02</a></h2>
+<table style="width:100%"><tr>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CH0UQCbnAHH" target="_blank">CH0UQCbnAHH</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CH0UQCbnAHH/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CpCHDvbrNTu" target="_blank">CpCHDvbrNTu</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CpCHDvbrNTu/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CmtWa92rh9H" target="_blank">CmtWa92rh9H</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CmtWa92rh9H/" ></a></blockquote>
+</td>
+
+</tr></table><hr>
+
+<script src="https://www.instagram.com/embed.js"></script>
 <h1>Click the Button to Run Script</h1>
+
+<button id="refreshButton">Refresh</button>
+
+  <script>
+    document.getElementById('refreshButton').addEventListener('click', function() {
+      // Trigger the GitHub Actions workflow by making an API request
+      fetch('/.github/workflows/run_python_script.yml', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ref: 'main',  // Specify the branch to trigger the workflow
+        }),
+      })
+        .then(response => {
+          if (response.ok) {
+            alert('Script triggered.');
+          } else {
+            alert('Failed to trigger the script.');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while running the script. Please try again later.');
+        });
+    });
+  </script>
 </body>
 </html>
