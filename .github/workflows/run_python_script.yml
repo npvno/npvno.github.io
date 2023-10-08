@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.11.0  # Specify your Python version
 
@@ -33,7 +33,7 @@ jobs:
           INSTA_PASSWORD: ${{ secrets.INSTA_PASSWORD }}
           INSTA_CSRF: ${{ secrets.INSTA_CSRF }}
           INSTA_SESSION: ${{ secrets.INSTA_SESSION }}
-        run: python InstaAPI2.py
+        run: python InstaAPI.py
 
 
       - name: Commit and Push Changes
@@ -41,5 +41,5 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add index.html
-          git commit -m "Add generated file to main directory"
+          git commit -m "Add generated file to main directory `date +'%Y-%m-%d %H:%M:%S'`"
           git push origin main

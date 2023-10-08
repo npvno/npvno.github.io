@@ -56,7 +56,7 @@ print(top_posts_list)
 
 
 
-x="""<h1>Click the Button to Run Script</h1>
+button="""<h1>Click the Button to Run Script</h1>
 
 <button id="refreshButton">Refresh</button>
 
@@ -87,21 +87,10 @@ x="""<h1>Click the Button to Run Script</h1>
   </script>"""
 
 
-# Get the path to the script's directory
-script_directory = os.path.dirname(os.path.abspath(__file__))
-
-# Define the filename (index.html)
-html_filename = "index.html"
-
-# Combine the script's directory and filename to create the full file path
-html_file_path = os.path.join(script_directory, html_filename)
-
-
-print(f"Current Directory: {script_directory}")
-print(f"HTML File Path: {html_file_path}")
+html_filename="index.html"
 
 # Create an HTML file for output
-with open(html_file_path, "w") as html_file:
+with open(html_filename, "w") as html_file:
     # Write the HTML header
     html_file.write("<html>\n\n<head>\n</head>\n\n<body>\n\n")
 
@@ -119,7 +108,7 @@ with open(html_file_path, "w") as html_file:
 
     # Write the HTML footer
     html_file.write('<script src="https://www.instagram.com/embed.js"></script>\n')
-    html_file.write(f'{x}\n')
+    html_file.write(f'{button}\n')
     html_file.write("</body>\n</html>\n")
 html_file.close()
 print(f"HTML file '{html_filename}' generated successfully.")
