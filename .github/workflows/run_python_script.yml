@@ -5,6 +5,9 @@ on:
     branches:
       - main  # Adjust the branch name as needed
 
+permissions:
+  contents: write
+
 jobs:
   run:
     runs-on: ubuntu-latest
