@@ -55,12 +55,16 @@ print(top_posts_list)
 
 
 
-# Load the right directory
-directory = './npvno.github.io/'
+# Get the current working directory where the script is running
+current_directory = os.getcwd()
+
+# Define the filename (index.html)
 html_filename = "index.html"
-html_file_path = os.path.join(directory, html_filename)
-if not os.path.isdir(directory):
-    os.mkdir(directory)
+
+# Combine the current directory and filename to create the full file path
+html_file_path = os.path.join(current_directory, html_filename)
+
+# Rest of your script...
 
 # Create an HTML file for output
 with open(html_file_path, "w") as html_file:
