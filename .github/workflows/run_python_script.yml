@@ -34,3 +34,16 @@ jobs:
           INSTA_CSRF: ${{ secrets.INSTA_CSRF }}
           INSTA_SESSION: ${{ secrets.INSTA_SESSION }}
         run: python InstaAPI2.py
+
+      - name: Move File to Main Directory
+        run: |
+          # Move the generated file to the main directory
+          mv index.html $GITHUB_WORKSPACE/generated_file.txt
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add index.html
+          git commit -m "Add generated file to main directory"
+          git push origin main
