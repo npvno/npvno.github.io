@@ -36,16 +36,10 @@ jobs:
         run: python InstaAPI2.py
 
 
-      - name: Generate HTML File
-        run: |
-          # Create the HTML file
-          echo "<html>\n\n<head>\n</head>\n\n<body>\n\n<h1>Click the Button to Run Script</h1>\n\n</body>\n</html>" > index.html
-          echo "HTML file 'index.html' generated successfully."
-
       - name: Move File to Main Directory
         run: |
           # Move the generated file to the main directory
-          mv index.html $GITHUB_WORKSPACE/generated_file.txt
+          mv index.html $GITHUB_WORKSPACE/index.html
 
       - name: Commit and Push Changes
         run: |
