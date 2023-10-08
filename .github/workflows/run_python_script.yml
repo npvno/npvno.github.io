@@ -36,11 +36,6 @@ jobs:
         run: python InstaAPI2.py
 
 
-      - name: Move File to Main Directory
-        run: |
-          # Move the generated file to the main directory
-          mv index.html $GITHUB_WORKSPACE/index.html
-
       - name: Commit and Push Changes
         run: |
           git config --global user.name "GitHub Actions"
