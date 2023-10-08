@@ -56,25 +56,26 @@ print(top_posts_list)
 
 
 
-button="""<h1>Click the Button to Run Script</h1>
+button="""
+<h1>Click the Button to Run Script</h1>
+
+<input type="text" id="tokenInput" placeholder="Enter GitHub Token">
 
 <button id="triggerButton">Trigger Workflow</button>
 
 <script>
   // Function to trigger the workflow when the button is clicked
   function triggerWorkflow() {
-    // Build the URL for the fetch request
-    const url = '/repos/npvno/npvno.github.io/dispatches';
+    const token = document.getElementById('tokenInput').value;
     
-    fetch(url, {
+    fetch('/trigger-workflow', {
       method: 'POST',
       headers: {
-        'Authorization': `token ${secrets.ACCES_TOKEN_WORKFLOW}`, // Replace with the correct variable or value
-        'Accept': 'application/vnd.github.v3+json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        event_type: 'run_python_script.yml' 
+        token: token,
+        eventType: 'run_python_script.yml'
       })
     })
     .then(response => {
@@ -94,8 +95,7 @@ button="""<h1>Click the Button to Run Script</h1>
   document.getElementById('triggerButton').addEventListener('click', triggerWorkflow);
 </script>
 
-
-  """
+"""
 
 
 html_filename="index.html"
