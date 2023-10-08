@@ -63,10 +63,13 @@ button="""<h1>Click the Button to Run Script</h1>
 <script>
   // Function to trigger the workflow when the button is clicked
   function triggerWorkflow() {
-    fetch('/repos/npvno/npvno.github.io/dispatches', {
+    // Build the URL for the fetch request
+    const url = '/repos/npvno/npvno.github.io/dispatches';
+    
+    fetch(url, {
       method: 'POST',
       headers: {
-        'Authorization': `token ${{ secrets.ACCES_TOKEN_WORKFLOW }}`, 
+        'Authorization': `token ${secrets.ACCES_TOKEN_WORKFLOW}`, // Replace with the correct variable or value
         'Accept': 'application/vnd.github.v3+json',
         'Content-Type': 'application/json'
       },
@@ -90,6 +93,7 @@ button="""<h1>Click the Button to Run Script</h1>
   // Attach the click event handler to the button
   document.getElementById('triggerButton').addEventListener('click', triggerWorkflow);
 </script>
+
 
   """
 
