@@ -1,12 +1,10 @@
 name: Run Python Script
 
 on:
-  push:
-    branches:
-      - main  # Adjust the branch name as needed
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  repository_dispatch:
+    types:
+      - button-pressed
 
 permissions:
   contents: write
