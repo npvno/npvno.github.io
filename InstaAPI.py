@@ -58,33 +58,40 @@ print(top_posts_list)
 
 button="""<h1>Click the Button to Run Script</h1>
 
-<button id="refreshButton">Refresh</button>
+<button id="triggerButton">Trigger Workflow</button>
 
-  <script>
-    document.getElementById('refreshButton').addEventListener('click', function() {
-      // Trigger the GitHub Actions workflow by making an API request
-      fetch('/.github/workflows/run_python_script.yml', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ref: 'main',  // Specify the branch to trigger the workflow
-        }),
+<script>
+  // Function to trigger the workflow when the button is clicked
+  function triggerWorkflow() {
+    fetch('/repos/npvno/npvno.github.io/dispatches', {
+      method: 'POST',
+      headers: {
+        'Authorization': `token ${{ secrets.ACCES_TOKEN_WORKFLOW }}`, 
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        event_type: 'run_python_script.yml' 
       })
-        .then(response => {
-          if (response.ok) {
-            alert('Script triggered.');
-          } else {
-            alert('Failed to trigger the script.');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('An error occurred while running the script. Please try again later.');
-        });
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Workflow triggered successfully.');
+      } else {
+        alert('Failed to trigger the workflow.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while triggering the workflow.');
     });
-  </script>"""
+  }
+
+  // Attach the click event handler to the button
+  document.getElementById('triggerButton').addEventListener('click', triggerWorkflow);
+</script>
+
+  """
 
 
 html_filename="index.html"
