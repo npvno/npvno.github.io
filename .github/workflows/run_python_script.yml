@@ -33,4 +33,4 @@ jobs:
           INSTA_PASSWORD: ${{ secrets.INSTA_PASSWORD }}
           INSTA_CSRF: ${{ secrets.INSTA_CSRF }}
           INSTA_SESSION: ${{ secrets.INSTA_SESSION }}
-        run: python InstaAPI.py
+        run: python InstaAPI2.py
