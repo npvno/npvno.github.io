@@ -97,7 +97,7 @@ html_filename = "index.html"
 html_file_path = os.path.join(script_directory, html_filename)
 
 
-print(f"Current Directory: {current_directory}")
+print(f"Current Directory: {script_directory}")
 print(f"HTML File Path: {html_file_path}")
 
 # Create an HTML file for output
