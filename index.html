@@ -19,11 +19,13 @@
                 // Iterate through the users and create HTML elements
                 data.users.forEach(user => {
                     const userDiv = document.createElement('div');
+                    const usernameH2 = document.createElement('h2')
                     const usernameLink = document.createElement('a');
                     usernameLink.href = `https://www.instagram.com/${user.username}`;
                     usernameLink.target = '_blank';
                     usernameLink.textContent = user.username;
-                    userDiv.appendChild(usernameLink);
+                    usernameH2.appendChild(usernameLink);
+                    userDiv.appendChild(usernameH2);
 
                     const postTable = document.createElement('table');
                     postTable.style.width = '100%';
@@ -35,7 +37,20 @@
                         postLink.href = `https://www.instagram.com/p/${postID}`;
                         postLink.target = '_blank';
                         postLink.textContent = `Post ID: ${postID}`;
+
+                        // Create the blockquote element
+                        const blockquote = document.createElement('blockquote');
+                        blockquote.setAttribute('style', 'width: 300px;');
+                        blockquote.setAttribute('class', 'instagram-media');
+                        blockquote.setAttribute('data-instgrm-version', '14');
+
+                        const blockquoteLink = document.createElement('a');
+                        blockquoteLink.href = `https://www.instagram.com/p/${postID}/`;
+                        blockquote.appendChild(blockquoteLink);
+
+                        // Append the postLink and blockquote to the postTableCell
                         postTableCell.appendChild(postLink);
+                        postTableCell.appendChild(blockquote); // Append the blockquote element
                         postTableRow.appendChild(postTableCell);
                         postTable.appendChild(postTableRow);
                     });
