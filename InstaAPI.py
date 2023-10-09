@@ -61,7 +61,7 @@ button="""
 
 <h1>Click the Button to Run Script</h1>
 
-<input type="text" id="tokenInput" placeholder="Enter GitHub Token">
+<input type="text" id="tokenInput" size="45" placeholder="Enter GitHub Token">
 
 <button id="triggerButton">Trigger Workflow</button>
 
