@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types:
-      - button-pressed
+      - refresh-button-pressed
 
 permissions:
   contents: write

@@ -1,124 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Using JSON Data in HTML</title>
+    <title>Post Selection</title>
+    <script src="postTablesLoader.js"></script>
+    <script src="triggerWorkflow.js"></script>
+    <script src="https://www.instagram.com/embed.js"></script>
 </head>
 <body>
-    <h1>JSON Data</h1>
-    
-    <!-- Create a container for the user data -->
-    <div id="user-container"></div>
-    
-    <script>
-        // Load and parse the JSON data
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                const userContainer = document.getElementById('user-container');
 
-                // Iterate through the users and create HTML elements
-                data.users.forEach(user => {
-                    const userDiv = document.createElement('div');
-                    const usernameH2 = document.createElement('h2')
-                    const usernameLink = document.createElement('a');
-                    usernameLink.href = `https://www.instagram.com/${user.username}`;
-                    usernameLink.target = '_blank';
-                    usernameLink.textContent = user.username;
-                    usernameH2.appendChild(usernameLink);
-                    userDiv.appendChild(usernameH2);
-
-                    
-                    const postTable = document.createElement('table');
-                    postTable.style.width = '100%';
-                    const postTableRow = document.createElement('tr');
-
-                    user.postIDs.forEach(postID => {
-                        const postTableCell = document.createElement('td');
-
-                        // Create a span element to contain "Post ID:" and ${postID}
-                        const postTextSpan = document.createElement('span');
-                        postTextSpan.style.display = 'inline'; // Set display to inline
-                        postTextSpan.textContent = 'Post ID: ';
-
-                        // Create an anchor element for the clickable ${postID}
-                        const postLink = document.createElement('a');
-                        postLink.href = `https://www.instagram.com/p/${postID}`;
-                        postLink.target = '_blank';
-                        postLink.textContent = `${postID}`;
+  <div id="post-tables"></div>
+  
+  <h1>Refresh Selected Post</h1>
+  <input type="text" id="tokenInput" size="45" placeholder="Enter GitHub Token">
+  <button id="refreshButton">Refresh</button>
 
 
-                        // Create the blockquote element
-                        const blockquote = document.createElement('blockquote');
-                        blockquote.setAttribute('style', 'width: 300px;');
-                        blockquote.setAttribute('class', 'instagram-media');
-                        blockquote.setAttribute('data-instgrm-version', '14');
-
-                        const blockquoteLink = document.createElement('a');
-                        blockquoteLink.href = `https://www.instagram.com/p/${postID}/`;
-                        blockquote.appendChild(blockquoteLink);
-
-                        // Append the postLink and blockquote to the postTableCell
-                        postTextSpan.appendChild(postLink);
-                        postTableCell.appendChild(postTextSpan);
-                        postTableCell.appendChild(blockquote); // Append the blockquote element
-                        postTableRow.appendChild(postTableCell); 
-                    });
-
-                  postTable.appendChild(postTableRow);
-                  userDiv.appendChild(postTable);
-                  userDiv.appendChild(document.createElement('hr'));
-                  userContainer.appendChild(userDiv);
-                });
-            })
-            .catch(error => {
-                console.error('Error loading JSON data:', error);
-            });
-    </script>
-    <script src="https://www.instagram.com/embed.js"></script>
-
-
-<h1>Click the Button to Run Script</h1>
-
-<input type="text" id="tokenInput" size="45" placeholder="Enter GitHub Token">
-
-<button id="triggerButton">Trigger Workflow</button>
-
-<script type="module">
-  import { Octokit } from "https://esm.sh/@octokit/core";
-
-  function triggerWorkflow() {
-    const token = document.getElementById('tokenInput').value;
-    const owner = 'npvno';
-    const repo = 'npvno.github.io';
-
-    // Create a payload for the repository dispatch event
-    const payload = {
-      event_type: 'button-pressed' // Replace with your event type
-    };
-
-    fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-      .then(response => {
-        if (response.ok) {
-          console.log('Workflow triggered successfully.');
-        } else {
-          console.error('Failed to trigger workflow:', response.statusText);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
-
-  document.getElementById('triggerButton').addEventListener('click', triggerWorkflow);
-</script>
 
 
 </body>
