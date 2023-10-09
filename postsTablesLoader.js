@@ -41,6 +41,7 @@ fetch('data.json')
                 blockquote.setAttribute('style', 'width: 300px;');
                 blockquote.setAttribute('class', 'instagram-media');
                 blockquote.setAttribute('data-instgrm-version', '14');
+                blockquote.setAttribute('omitscript', 'true');
 
                 const blockquoteLink = document.createElement('a');
                 blockquoteLink.href = `https://www.instagram.com/p/${postID}/`;
@@ -59,9 +60,7 @@ fetch('data.json')
           postTables.appendChild(userDiv);
         });
     })
-    .then(
-        window.instgrm.Embeds.process()
-    )
+
     .catch(error => {
         console.error('Error loading JSON data:', error);
     });
