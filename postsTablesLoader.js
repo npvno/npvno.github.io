@@ -62,3 +62,7 @@ fetch('data.json')
     .catch(error => {
         console.error('Error loading JSON data:', error);
     });
+
+if ( typeof window.instgrm !== 'undefined' ) {
+    window.instgrm.Embeds.process();
+}
