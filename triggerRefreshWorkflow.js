@@ -2,6 +2,8 @@ function triggerRefreshWorkflow() {
 const token = document.getElementById('tokenInput').value;
 const owner = 'npvno';
 const repo = 'npvno.github.io';
+var button_text = document.getElementById("button_text");
+
 
 // Create a payload for the repository dispatch event
 const payload = {
@@ -19,13 +21,13 @@ fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
 })
     .then(response => {
     if (response.ok) {
-        console.log('Workflow triggered successfully.');
+        button_text.innerText = 'Workflow triggered successfully.';
     } else {
-        console.error('Failed to trigger workflow:', response.statusText);
+        button_text.innerText = 'Failed to trigger workflow     ' + response.statusText;
     }
     })
     .catch(error => {
-    console.error('Error:', error);
+        button_text.innerText = 'Error     ' + error;
     });
 }
 
