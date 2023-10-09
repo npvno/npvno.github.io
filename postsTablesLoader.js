@@ -62,5 +62,3 @@ fetch('data.json')
     .catch(error => {
         console.error('Error loading JSON data:', error);
     });
-
-window.instgrm.Embeds.process()
