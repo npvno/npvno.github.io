@@ -1,0 +1,117 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+<h2><a href="https://www.instagram.com/pnaddaathngswaang" target="_blank">pnaddaathngswaang</a></h2>
+<table style="width:100%"><tr>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CnGALzGrtbZ" target="_blank">CnGALzGrtbZ</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CnGALzGrtbZ/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CnFJgzcLcpu" target="_blank">CnFJgzcLcpu</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CnFJgzcLcpu/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CcPDX4crohz" target="_blank">CcPDX4crohz</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CcPDX4crohz/" ></a></blockquote>
+</td>
+
+</tr></table><hr>
+
+<h2><a href="https://www.instagram.com/yulita_964" target="_blank">yulita_964</a></h2>
+<table style="width:100%"><tr>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CjeS8-LpWE6" target="_blank">CjeS8-LpWE6</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CjeS8-LpWE6/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CjS4j4trfiV" target="_blank">CjS4j4trfiV</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CjS4j4trfiV/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CkZojc9PSmI" target="_blank">CkZojc9PSmI</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CkZojc9PSmI/" ></a></blockquote>
+</td>
+
+</tr></table><hr>
+
+<h2><a href="https://www.instagram.com/sirikaandaaphilaangaam" target="_blank">sirikaandaaphilaangaam</a></h2>
+<table style="width:100%"><tr>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CiUTqe2rSwx" target="_blank">CiUTqe2rSwx</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CiUTqe2rSwx/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/BsHv2JQlH9H" target="_blank">BsHv2JQlH9H</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/BsHv2JQlH9H/" ></a></blockquote>
+</td>
+
+<td>
+<p>Post ID: <a href="https://www.instagram.com/p/CZUqEBYPWCn" target="_blank">CZUqEBYPWCn</a></p>
+<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CZUqEBYPWCn/" ></a></blockquote>
+</td>
+
+</tr></table><hr>
+
+<script src="https://www.instagram.com/embed.js"></script>
+
+
+
+<h1>Click the Button to Run Script</h1>
+
+<input type="text" id="tokenInput" size="45" placeholder="Enter GitHub Token">
+
+<button id="triggerButton">Trigger Workflow</button>
+
+<script type="module">
+  import { Octokit } from "https://esm.sh/@octokit/core";
+
+  function triggerWorkflow() {
+    const token = document.getElementById('tokenInput').value;
+    const owner = 'npvno';
+    const repo = 'npvno.github.io';
+
+    // Create a payload for the repository dispatch event
+    const payload = {
+      event_type: 'button-pressed' // Replace with your event type
+    };
+
+    fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Workflow triggered successfully.');
+        } else {
+          console.error('Failed to trigger workflow:', response.statusText);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
+  document.getElementById('triggerButton').addEventListener('click', triggerWorkflow);
+</script>
+
+
+</body>
+</html>

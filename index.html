@@ -1,72 +1,54 @@
+<!DOCTYPE html>
 <html>
-
 <head>
+    <title>Using JSON Data in HTML</title>
 </head>
-
 <body>
+    <h1>JSON Data</h1>
+    
+    <!-- Create a container for the user data -->
+    <div id="user-container"></div>
+    
+    <script>
+        // Load and parse the JSON data
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const userContainer = document.getElementById('user-container');
 
-<h2><a href="https://www.instagram.com/pnaddaathngswaang" target="_blank">pnaddaathngswaang</a></h2>
-<table style="width:100%"><tr>
+                // Iterate through the users and create HTML elements
+                data.users.forEach(user => {
+                    const userDiv = document.createElement('div');
+                    const usernameLink = document.createElement('a');
+                    usernameLink.href = `https://www.instagram.com/${user.username}`;
+                    usernameLink.target = '_blank';
+                    usernameLink.textContent = user.username;
+                    userDiv.appendChild(usernameLink);
 
-<td>
-<p>Post ID: <a href="https://www.instagram.com/p/CnGALzGrtbZ" target="_blank">CnGALzGrtbZ</a></p>
-<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CnGALzGrtbZ/" ></a></blockquote>
-</td>
-
-<td>
-<p>Post ID: <a href="https://www.instagram.com/p/CnFJgzcLcpu" target="_blank">CnFJgzcLcpu</a></p>
-<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CnFJgzcLcpu/" ></a></blockquote>
-</td>
-
-<td>
-<p>Post ID: <a href="https://www.instagram.com/p/CcPDX4crohz" target="_blank">CcPDX4crohz</a></p>
-<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CcPDX4crohz/" ></a></blockquote>
-</td>
-
-</tr></table><hr>
-
-<h2><a href="https://www.instagram.com/yulita_964" target="_blank">yulita_964</a></h2>
-<table style="width:100%"><tr>
-
-<td>
-<p>Post ID: <a href="https://www.instagram.com/p/CjeS8-LpWE6" target="_blank">CjeS8-LpWE6</a></p>
-<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CjeS8-LpWE6/" ></a></blockquote>
-</td>
-
-<td>
-<p>Post ID: <a href="https://www.instagram.com/p/CjS4j4trfiV" target="_blank">CjS4j4trfiV</a></p>
-<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CjS4j4trfiV/" ></a></blockquote>
-</td>
-
-<td>
-<p>Post ID: <a href="https://www.instagram.com/p/CkZojc9PSmI" target="_blank">CkZojc9PSmI</a></p>
-<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CkZojc9PSmI/" ></a></blockquote>
-</td>
-
-</tr></table><hr>
-
-<h2><a href="https://www.instagram.com/sirikaandaaphilaangaam" target="_blank">sirikaandaaphilaangaam</a></h2>
-<table style="width:100%"><tr>
-
-<td>
-<p>Post ID: <a href="https://www.instagram.com/p/CiUTqe2rSwx" target="_blank">CiUTqe2rSwx</a></p>
-<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CiUTqe2rSwx/" ></a></blockquote>
-</td>
-
-<td>
-<p>Post ID: <a href="https://www.instagram.com/p/BsHv2JQlH9H" target="_blank">BsHv2JQlH9H</a></p>
-<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/BsHv2JQlH9H/" ></a></blockquote>
-</td>
-
-<td>
-<p>Post ID: <a href="https://www.instagram.com/p/CZUqEBYPWCn" target="_blank">CZUqEBYPWCn</a></p>
-<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/CZUqEBYPWCn/" ></a></blockquote>
-</td>
-
-</tr></table><hr>
-
-<script src="https://www.instagram.com/embed.js"></script>
-
+                    const postTable = document.createElement('table');
+                    postTable.style.width = '100%';
+                    
+                    user.postIDs.forEach(postID => {
+                        const postTableRow = document.createElement('tr');
+                        const postTableCell = document.createElement('td');
+                        const postLink = document.createElement('a');
+                        postLink.href = `https://www.instagram.com/p/${postID}`;
+                        postLink.target = '_blank';
+                        postLink.textContent = `Post ID: ${postID}`;
+                        postTableCell.appendChild(postLink);
+                        postTableRow.appendChild(postTableCell);
+                        postTable.appendChild(postTableRow);
+                    });
+                    
+                    userDiv.appendChild(postTable);
+                    userContainer.appendChild(userDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading JSON data:', error);
+            });
+    </script>
+    <script src="https://www.instagram.com/embed.js"></script>
 
 
 <h1>Click the Button to Run Script</h1>
