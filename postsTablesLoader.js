@@ -1,6 +1,6 @@
 
 // Load and parse the JSON data
-fetch('data.json')
+fetch('top_posts.json')
     .then(response => response.json())
     .then(data => {
         const postTables = document.getElementById('post-tables');

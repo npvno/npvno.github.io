@@ -1,6 +1,5 @@
 from instaloader import Instaloader, Profile, Post, Hashtag, NodeIterator
-import random
-import os
+import random, os, json
 
 INSTA_USERNAME = os.environ.get("INSTA_USERNAME")
 INSTA_PASSWORD = os.environ.get("INSTA_PASSWORD")
@@ -55,81 +54,27 @@ print(top_posts_list)
 
 
 
+# Create a dictionary to store user data
+user_data = {
+    "users": []
+}
 
-button="""
+# Iterate through the top_posts_list and create the JSON structure
+for top_posts in top_posts_list:
+    user_info = {
+        "username": top_posts[0].owner_username,
+        "postIDs": [post.shortcode for post in top_posts]
+    }
+    user_data["users"].append(user_info)
 
+# Define the JSON file name
+json_filename = "top_posts.json"
 
-<h1>Click the Button to Run Script</h1>
+# Write the JSON data to the file
+with open(json_filename, "w") as json_file:
+    json.dump(user_data, json_file, indent=4)
 
-<input type="text" id="tokenInput" size="45" placeholder="Enter GitHub Token">
-
-<button id="triggerButton">Trigger Workflow</button>
-
-<script type="module">
-  import { Octokit } from "https://esm.sh/@octokit/core";
-
-  function triggerWorkflow() {
-    const token = document.getElementById('tokenInput').value;
-    const owner = 'npvno';
-    const repo = 'npvno.github.io';
-
-    // Create a payload for the repository dispatch event
-    const payload = {
-      event_type: 'button-pressed' // Replace with your event type
-    };
-
-    fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-      .then(response => {
-        if (response.ok) {
-          console.log('Workflow triggered successfully.');
-        } else {
-          console.error('Failed to trigger workflow:', response.statusText);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
-
-  document.getElementById('triggerButton').addEventListener('click', triggerWorkflow);
-</script>
-
-"""
-
-
-html_filename="index.html"
-
-# Create an HTML file for output
-with open(html_filename, "w") as html_file:
-    # Write the HTML header
-    html_file.write("<html>\n\n<head>\n</head>\n\n<body>\n\n")
-
-    # Iterate through the top_posts_list and write the data to the HTML file
-    for top_posts in top_posts_list:
-        username = top_posts[0].owner_username
-        html_file.write(f'<h2><a href="https://www.instagram.com/{username}" target="_blank">{username}</a></h2>\n')
-        html_file.write(f'<table style="width:100%"><tr>\n\n')
-        for post in top_posts:
-            post_id = post.shortcode
-            post_url = post.url
-            html_file.write(f'<td>\n<p>Post ID: <a href="https://www.instagram.com/p/{post_id}" target="_blank">{post_id}</a></p>\n')
-            html_file.write(f'<blockquote style="width:300px;" class="instagram-media" data-instgrm-version="14"><a href="https://www.instagram.com/p/{post_id}/" ></a></blockquote>\n</td>\n\n')
-        html_file.write("</tr></table><hr>\n\n")  # Add a horizontal line between users
-
-    # Write the HTML footer
-    html_file.write('<script src="https://www.instagram.com/embed.js"></script>\n')
-    html_file.write(f'{button}\n')
-    html_file.write("</body>\n</html>\n")
-html_file.close()
-print(f"HTML file '{html_filename}' generated successfully.")
+print(f"JSON file '{json_filename}' generated successfully.")
 
 
 """
