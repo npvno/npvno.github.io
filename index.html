@@ -34,10 +34,18 @@
 
                     user.postIDs.forEach(postID => {
                         const postTableCell = document.createElement('td');
+
+                        // Create a span element to contain "Post ID:" and ${postID}
+                        const postTextSpan = document.createElement('span');
+                        postTextSpan.style.display = 'inline'; // Set display to inline
+                        postTextSpan.textContent = 'Post ID: ';
+
+                        // Create an anchor element for the clickable ${postID}
                         const postLink = document.createElement('a');
                         postLink.href = `https://www.instagram.com/p/${postID}`;
                         postLink.target = '_blank';
-                        postLink.textContent = `Post ID: ${postID}`;
+                        postLink.textContent = `${postID}`;
+
 
                         // Create the blockquote element
                         const blockquote = document.createElement('blockquote');
@@ -50,13 +58,15 @@
                         blockquote.appendChild(blockquoteLink);
 
                         // Append the postLink and blockquote to the postTableCell
-                        postTableCell.appendChild(postLink);
+                        postTextSpan.appendChild(postLink);
+                        postTableCell.appendChild(postTextSpan);
                         postTableCell.appendChild(blockquote); // Append the blockquote element
                         postTableRow.appendChild(postTableCell); 
                     });
-                    
+
                   postTable.appendChild(postTableRow);
                   userDiv.appendChild(postTable);
+                  userDiv.appendChild(document.createElement('hr'));
                   userContainer.appendChild(userDiv);
                 });
             })
