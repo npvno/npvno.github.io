@@ -63,6 +63,3 @@ fetch('data.json')
         console.error('Error loading JSON data:', error);
     });
 
-if ( typeof window.instgrm !== 'undefined' ) {
-    window.instgrm.Embeds.process();
-}
