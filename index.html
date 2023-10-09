@@ -27,11 +27,12 @@
                     usernameH2.appendChild(usernameLink);
                     userDiv.appendChild(usernameH2);
 
+                    
                     const postTable = document.createElement('table');
                     postTable.style.width = '100%';
-                    
+                    const postTableRow = document.createElement('tr');
+
                     user.postIDs.forEach(postID => {
-                        const postTableRow = document.createElement('tr');
                         const postTableCell = document.createElement('td');
                         const postLink = document.createElement('a');
                         postLink.href = `https://www.instagram.com/p/${postID}`;
@@ -51,12 +52,12 @@
                         // Append the postLink and blockquote to the postTableCell
                         postTableCell.appendChild(postLink);
                         postTableCell.appendChild(blockquote); // Append the blockquote element
-                        postTableRow.appendChild(postTableCell);
-                        postTable.appendChild(postTableRow);
+                        postTableRow.appendChild(postTableCell); 
                     });
                     
-                    userDiv.appendChild(postTable);
-                    userContainer.appendChild(userDiv);
+                  postTable.appendChild(postTableRow);
+                  userDiv.appendChild(postTable);
+                  userContainer.appendChild(userDiv);
                 });
             })
             .catch(error => {
