@@ -59,6 +59,9 @@ fetch('data.json')
           postTables.appendChild(userDiv);
         });
     })
+    .then(
+        window.instgrm.Embeds.process()
+    )
     .catch(error => {
         console.error('Error loading JSON data:', error);
     });
