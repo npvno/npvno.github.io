@@ -19,9 +19,11 @@ for follower in profile.get_followers():
 print('*'*100)
 print('Followers list obtained')
 print('*'*100)
-# Define the JSON file name
-json_filename = "followers.json"
-# Write the JSON data to the file
-with open(json_filename, "w") as json_file:
-    json.dump(followers_list, json_file)
-print(f"JSON file '{json_filename}' generated successfully.")
+
+if followers_list:
+    json_filename = "followers.json"
+    with open(json_filename, "w") as json_file:
+        json.dump(followers_list, json_file)
+    print(f"JSON file '{json_filename}' generated successfully.")
+else:
+    print("THE LIST IS EMPTY, check target username or login credentials")
