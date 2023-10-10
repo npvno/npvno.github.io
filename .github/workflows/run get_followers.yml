@@ -1,10 +1,7 @@
-name: Run Python Script
+name: Get follower list json
 
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types:
-      - refresh-button-pressed
 
 permissions:
   contents: write
@@ -28,16 +25,16 @@ jobs:
       - name: Run Python Script
         env:
           INSTA_USERNAME: ${{ secrets.INSTA_USERNAME }}
-          INSTA_PASSWORD: ${{ secrets.INSTA_PASSWORD }}
           INSTA_CSRF: ${{ secrets.INSTA_CSRF }}
           INSTA_SESSION: ${{ secrets.INSTA_SESSION }}
-        run: python InstaAPI.py
+          TARGET_PAGE: ${{ secrets.TARGET_PAGE }}
+        run: python get_followers.py
 
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add top_posts.json
-          git commit -m "Add generated file to main directory `date +'%Y-%m-%d %H:%M:%S'`"
+          git add followers.json
+          git commit -m "Add followers list to main directory `date +'%Y-%m-%d %H:%M:%S'`"
           git push origin main

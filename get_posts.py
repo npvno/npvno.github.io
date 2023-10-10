@@ -1,15 +1,8 @@
-from instaloader import Instaloader, Profile, Post, Hashtag, NodeIterator
+from instaloader import Instaloader, Profile
 import random, os, json
 
-INSTA_USERNAME = os.environ.get("INSTA_USERNAME")
-INSTA_PASSWORD = os.environ.get("INSTA_PASSWORD")
-INSTA_SESSION = os.environ.get("INSTA_SESSION")
-INSTA_CSRF = os.environ.get("INSTA_CSRF")
-
-target_page = "eddyfrank325"
 
 L = Instaloader()
-
 
 # Define the JSON file name
 json_filename = "followers.json"
