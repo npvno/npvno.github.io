@@ -10,13 +10,7 @@ target_page = "eddyfrank325"
 
 
 L = Instaloader()
-
-#LOGIN
-try:
-    L.login(INSTA_USERNAME, INSTA_PASSWORD)
-except:
-    L.load_session(INSTA_USERNAME, {"sessionid": INSTA_SESSION, "csrftoken": INSTA_CSRF})
-    L.get_stories()
+L.load_session(INSTA_USERNAME, {"sessionid": INSTA_SESSION, "csrftoken": INSTA_CSRF})
 
 
 #Download the list of followers of the page
