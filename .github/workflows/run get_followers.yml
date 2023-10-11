@@ -1,4 +1,4 @@
-name: Get Follower List
+name: Get Followers List
 
 on:
   workflow_dispatch:
