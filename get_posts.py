@@ -1,4 +1,4 @@
-from instaloader import Instaloader, Profile
+from instaloader import Instaloader, Profile, exceptions
 import random, json
 
 
@@ -21,9 +21,10 @@ def get_all_posts(selected_profile):
     try:
         for post in post_iterator:
             posts.append(post)
-    except ConnectionException:
+    except exceptions.ConnectionException:
         print("error")
         print(post_iterator.total_index)
+        print(exceptions.ConnectionException.with_traceback)
     return posts
 
 
@@ -34,6 +35,7 @@ num_followers=3
 top_posts_list=[]
 while len(top_posts_list) < num_followers:
     random_follower = random.choice(followers_list)
+    print(f"Random follower is {random_follower}")
     profile = Profile.from_username(L.context, random_follower)
     if profile.is_private: #checking the profile is not private
         print(f"X {random_follower} not added to the list (private profile)")
