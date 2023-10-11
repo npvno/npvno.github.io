@@ -1,5 +1,5 @@
 from instaloader import Instaloader, Profile
-import random, os, json
+import random, json
 
 
 L = Instaloader()
@@ -11,8 +11,21 @@ with open(json_filename, "r") as json_file:
     followers_list = json.load(json_file)
 
 print('*'*100)
-print(f'List of {len(followers_list)} followers obtained')
+print(f'List of {len(followers_list)} followers loaded')
 print('*'*100)
+
+
+def get_all_posts(selected_profile):
+    post_iterator = selected_profile.get_posts()
+    posts=[]
+    try:
+        for post in post_iterator:
+            posts.append(post)
+    except ConnectionException:
+        print("error")
+        print(post_iterator.total_index)
+    return posts
+
 
 
 #Download all the post of selected followers sorted by likes and take top 3
@@ -21,18 +34,22 @@ num_followers=3
 top_posts_list=[]
 while len(top_posts_list) < num_followers:
     random_follower = random.choice(followers_list)
-    print("Random follower is: " + random_follower)
     profile = Profile.from_username(L.context, random_follower)
     if profile.is_private: #checking the profile is not private
-        print(f"X {random_follower} is private, skipping")
+        print(f"X {random_follower} not added to the list (private profile)")
     else:
-        posts_sorted_by_likes = sorted(profile.get_posts(),key=lambda p: p.likes + p.comments,reverse=True) #downloading the posts, I SHOULD CAP THE NUM OF POSTS TO n
-        posts_sorted_by_likes = [post for post in posts_sorted_by_likes if not post.is_video]
-        if len(posts_sorted_by_likes)>=num_top_posts: #making sure there is more than 3 posts
+        all_posts = get_all_posts(profile) #retrieving the posts
+        if len(all_posts)<num_top_posts: #making sure there is more than 3 posts
+            print(f"X {random_follower} not added to the list (not enought posts)")
+        else:
+            posts_sorted_by_likes = sorted(all_posts,key=lambda p: p.likes + p.comments,reverse=True) #classifying the posts
+            posts_sorted_by_likes = [post for post in posts_sorted_by_likes if not post.is_video]
             top_posts_list.append(posts_sorted_by_likes[:3])
             print(f"✓ {random_follower} added to the list")
-        else:
-            print(f"X {random_follower} not added to the list (not enought posts)")
+            
+
+
+
 print('*'*100)
 print('top_posts_list obtained')
 print('*'*100)

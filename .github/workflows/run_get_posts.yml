@@ -1,4 +1,4 @@
-name: Get posts JSON for HTML
+name: Get Best Posts
 
 on:
   workflow_dispatch:
