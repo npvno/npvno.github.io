@@ -23,6 +23,11 @@ def get_all_posts(selected_profile):
     try:
         for post in post_iterator:
             posts.append(post)
+            if post_iterator.total_index %100:
+                print(f"iterator length is {post_iterator.total_index}")
+                r=random.randint(20,40)
+                print(f'Sleeping {r} seconds...')
+                sleep(r)
     except exceptions.ConnectionException as err:
         print("ConnectionException Error:", err)
     finally:
@@ -52,7 +57,7 @@ while len(top_posts_list) < num_followers:
             print(f"✓ {random_follower} added to the list")
             r=random.randint(20,40)
             print(f'Sleeping {r} seconds...')
-            sleep(sleep(r))
+            sleep(r)
             
 
 
