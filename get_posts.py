@@ -25,7 +25,7 @@ def get_all_posts(selected_profile):
             posts.append(post)
             if post_iterator.total_index %100:
                 print(f"iterator length is {post_iterator.total_index}")
-                r=random.randint(20,40)
+                r=random.randint(5,10)
                 print(f'Sleeping {r} seconds...')
                 sleep(r)
     except exceptions.ConnectionException as err:
