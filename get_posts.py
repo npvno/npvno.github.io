@@ -21,12 +21,13 @@ def get_all_posts(selected_profile):
     try:
         for post in post_iterator:
             posts.append(post)
-    except exceptions.ConnectionException:
-        print("error")
-        print(post_iterator.total_index)
-        print(exceptions.ConnectionException.args)
+    except exceptions.ConnectionException as err:
+        print("error:", err)
+        print(f"type {type(err)}")
+        print(f"args {err.args}")
+        print(f"iterator length is {post_iterator.total_index}")
     finally:
-        print(f'posts lenghts is {len(posts)}')
+        print(f'posts lenght is {len(posts)}')
     return posts
 
 
