@@ -24,7 +24,7 @@ def get_all_posts(selected_profile):
     except exceptions.ConnectionException:
         print("error")
         print(post_iterator.total_index)
-        print(exceptions.ConnectionException.with_traceback)
+        print(exceptions.ConnectionException)
     return posts
 
 
