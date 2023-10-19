@@ -1,4 +1,5 @@
 from instaloader import Instaloader, Profile, exceptions
+from time import sleep
 import random, json
 
 
@@ -16,18 +17,16 @@ print('*'*100)
 
 
 def get_all_posts(selected_profile):
-    post_iterator = selected_profile.get_posts()
+    post_iterator = selected_profile.get_posts() #gets 112 posts without login
+    print(f"iterator length is {post_iterator.total_index}")
     posts=[]
     try:
         for post in post_iterator:
             posts.append(post)
     except exceptions.ConnectionException as err:
-        print("error:", err)
-        print(f"type {type(err)}")
-        print(f"args {err.args}")
-        print(f"iterator length is {post_iterator.total_index}")
+        print("ConnectionException Error:", err)
     finally:
-        print(f'posts lenght is {len(posts)}')
+        print(f'posts length is {len(posts)}')
     return posts
 
 
@@ -51,6 +50,9 @@ while len(top_posts_list) < num_followers:
             posts_sorted_by_likes = [post for post in posts_sorted_by_likes if not post.is_video]
             top_posts_list.append(posts_sorted_by_likes[:3])
             print(f"✓ {random_follower} added to the list")
+            r=random.randint(20,40)
+            print(f'Sleeping {r} seconds...')
+            sleep(sleep(r))
             
 
 
