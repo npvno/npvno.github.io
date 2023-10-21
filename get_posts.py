@@ -18,13 +18,18 @@ print('*'*100)
 
 
 def get_all_posts(selected_profile):
-    posts_limit = 12
+    posts_limit = 60
     posts_iterator = selected_profile.get_posts()
     posts=[]
     try:
         for post in posts_iterator:
             posts.append(post)
-            if posts_iterator.total_index >= posts_limit:
+            
+            if not posts_iterator.total_index % posts_limit:
+                r=random.randint(20,40)
+                print(f'Sleeping {r} seconds...')
+                sleep(r)
+            if posts_iterator.total_index >= posts_limit: 
                 break
     except exceptions.ConnectionException as err:
         print("ConnectionException Error:", err)  
