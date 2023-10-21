@@ -24,9 +24,10 @@ def get_all_posts(selected_profile):
     try:
         for post in posts_iterator:
             posts.append(post)
+            print(f'Posts list length is {len(posts)}')
             
-            if not posts_iterator.total_index % posts_limit:
-                r=random.randint(20,40)
+            if not posts_iterator.total_index % 12:
+                r=random.randint(5,20)
                 print(f'Sleeping {r} seconds...')
                 sleep(r)
             if posts_iterator.total_index >= posts_limit: 
@@ -34,7 +35,7 @@ def get_all_posts(selected_profile):
     except exceptions.ConnectionException as err:
         print("ConnectionException Error:", err)  
     finally:
-        print(f'Posts list length is {len(posts)}')
+        print(f'Final posts list length is {len(posts)}')
         return posts
 
 
