@@ -16,21 +16,9 @@ print(f'List of {len(followers_list)} followers loaded')
 print('*'*100)
 
 
-num_followers=3
-num_top_posts=3
-top_posts_list=[]
-
-
-def num_posts_downloaded_per_profile(num_profiles):
-    limit=112
-    for i in range (limit-1,0,-1):
-        if not (i%num_profiles):
-            return int(i/3)
-
 
 def get_all_posts(selected_profile):
-    posts_limit = num_posts_downloaded_per_profile(num_followers)
-    posts_limit = 24 #20<x<37
+    posts_limit = 12
     posts_iterator = selected_profile.get_posts()
     posts=[]
     try:
@@ -47,6 +35,9 @@ def get_all_posts(selected_profile):
 
 
 #Download all the post of selected followers sorted by likes and take top 3
+num_followers=3
+num_top_posts=3
+top_posts_list=[]
 
 while len(top_posts_list) < num_followers:
     random_follower = random.choice(followers_list)
