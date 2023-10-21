@@ -16,30 +16,37 @@ print(f'List of {len(followers_list)} followers loaded')
 print('*'*100)
 
 
+num_followers=3
+num_top_posts=3
+top_posts_list=[]
+
+
+def num_posts_downloaded_per_profile(num_profiles):
+    limit=112
+    for i in range (limit-1,0,-1):
+        if not (i%num_profiles):
+            return int(i/3)
+
+
 def get_all_posts(selected_profile):
-    post_iterator = selected_profile.get_posts() #gets 112 posts without login
-    print(f"iterator length is {post_iterator.total_index}")
+    posts_limit = num_posts_downloaded_per_profile()
+    posts_iterator = selected_profile.get_posts()
     posts=[]
     try:
-        for post in post_iterator:
+        for post in posts_iterator:
             posts.append(post)
-            if post_iterator.total_index %100:
-                print(f"iterator length is {post_iterator.total_index}")
-                r=random.randint(5,10)
-                print(f'Sleeping {r} seconds...')
-                sleep(r)
+            if posts_iterator.total_index >= posts_limit:
+                break
     except exceptions.ConnectionException as err:
         print("ConnectionException Error:", err)
     finally:
-        print(f'posts length is {len(posts)}')
+        print(f'Posts list length is {len(posts)}')
     return posts
 
 
 
 #Download all the post of selected followers sorted by likes and take top 3
-num_top_posts=3
-num_followers=3
-top_posts_list=[]
+
 while len(top_posts_list) < num_followers:
     random_follower = random.choice(followers_list)
     print(f"Random follower is {random_follower}")
@@ -52,12 +59,12 @@ while len(top_posts_list) < num_followers:
             print(f"X {random_follower} not added to the list (not enought posts)")
         else:
             posts_sorted_by_likes = sorted(all_posts,key=lambda p: p.likes + p.comments,reverse=True) #classifying the posts
-            posts_sorted_by_likes = [post for post in posts_sorted_by_likes if not post.is_video]
-            top_posts_list.append(posts_sorted_by_likes[:3])
+            posts_sorted_by_likes = [post for post in posts_sorted_by_likes if not post.is_video] #removing videos
+            top_posts_list.append(posts_sorted_by_likes[:3]) #taking top three
             print(f"✓ {random_follower} added to the list")
-            r=random.randint(20,40)
-            print(f'Sleeping {r} seconds...')
-            sleep(r)
+            #r=random.randint(20,40)
+            #print(f'Sleeping {r} seconds...')
+            #sleep(r)
             
 
 
