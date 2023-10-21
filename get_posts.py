@@ -39,10 +39,10 @@ def get_all_posts(selected_profile):
             if posts_iterator.total_index >= posts_limit:
                 break
     except exceptions.ConnectionException as err:
-        print("ConnectionException Error:", err)
+        print("ConnectionException Error:", err)  
     finally:
         print(f'Posts list length is {len(posts)}')
-    return posts
+        return posts
 
 
 
@@ -72,8 +72,8 @@ while len(top_posts_list) < num_followers:
 
 print('*'*100)
 print('top_posts_list obtained')
-print('*'*100)
 print(top_posts_list)
+print('*'*100)
 
 
 
