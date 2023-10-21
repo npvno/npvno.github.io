@@ -30,7 +30,7 @@ def num_posts_downloaded_per_profile(num_profiles):
 
 def get_all_posts(selected_profile):
     posts_limit = num_posts_downloaded_per_profile(num_followers)
-    posts_limit = 30 #20<x<37
+    posts_limit = 12 #20<x<37
     posts_iterator = selected_profile.get_posts()
     posts=[]
     try:
