@@ -18,17 +18,15 @@ print('*'*100)
 
 
 def get_all_posts(selected_profile):
-    posts_limit = 60
+    posts_limit = 100
     posts_iterator = selected_profile.get_posts()
     posts=[]
     try:
         for post in posts_iterator:
             posts.append(post)
-            print(f'Posts list length is {len(posts)}')
-            
             if not posts_iterator.total_index % 12:
                 r=random.randint(5,20)
-                print(f'Sleeping {r} seconds...')
+                print(f'Posts list length is {len(posts)}, sleeping {r} seconds...')
                 sleep(r)
             if posts_iterator.total_index >= posts_limit: 
                 break
@@ -60,9 +58,10 @@ while len(top_posts_list) < num_followers:
             posts_sorted_by_likes = [post for post in posts_sorted_by_likes if not post.is_video] #removing videos
             top_posts_list.append(posts_sorted_by_likes[:3]) #taking top three
             print(f"✓ {random_follower} added to the list")
-            r=random.randint(5,20)
-            print(f'Sleeping {r} seconds...')
-            sleep(r)
+            if len(top_posts_list) >= 2:
+                r=random.randint(500,600)
+                print(f"More than two profile's posts retrieved, sleeping {r} seconds...")
+                sleep(r)
             
 
 
