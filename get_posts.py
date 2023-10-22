@@ -60,9 +60,9 @@ while len(top_posts_list) < num_followers:
             posts_sorted_by_likes = [post for post in posts_sorted_by_likes if not post.is_video] #removing videos
             top_posts_list.append(posts_sorted_by_likes[:3]) #taking top three
             print(f"✓ {random_follower} added to the list")
-            #r=random.randint(20,40)
-            #print(f'Sleeping {r} seconds...')
-            #sleep(r)
+            r=random.randint(5,20)
+            print(f'Sleeping {r} seconds...')
+            sleep(r)
             
 
 
