@@ -1,5 +1,6 @@
 from instaloader import Instaloader, Profile, exceptions
 from time import sleep
+from datetime import datetime, timedelta
 import random, json
 
 
@@ -18,7 +19,7 @@ print('*'*100)
 
 
 def get_all_posts(selected_profile):
-    posts_limit = 100
+    posts_limit = 12
     posts_iterator = selected_profile.get_posts()
     posts=[]
     try:
@@ -51,17 +52,17 @@ while len(top_posts_list) < num_followers:
         print(f"X {random_follower} not added to the list (private profile)")
     else:
         all_posts = get_all_posts(profile) #retrieving the posts
+        most_recent_post=max(all_posts, key=lambda post: post.date_local)
         if len(all_posts)<num_top_posts: #making sure there is more than 3 posts
             print(f"X {random_follower} not added to the list (not enought posts)")
+        elif most_recent_post.date_local >= (datetime.now() - timedelta(days=90)): #making sure the most recent posts is no older than 3 months
+              print(f"The most recent post is older than 3 months. (ID: {most_recent_post.shortcode})")
+              print(f"X {random_follower} not added to the list (last post too old)")
         else:
             posts_sorted_by_likes = sorted(all_posts,key=lambda p: p.likes + p.comments,reverse=True) #classifying the posts
             posts_sorted_by_likes = [post for post in posts_sorted_by_likes if not post.is_video] #removing videos
             top_posts_list.append(posts_sorted_by_likes[:3]) #taking top three
             print(f"✓ {random_follower} added to the list")
-            if len(top_posts_list) >= 2:
-                r=random.randint(500,600)
-                print(f"More than two profile's posts retrieved, sleeping {r} seconds...")
-                sleep(r)
             
 
 
