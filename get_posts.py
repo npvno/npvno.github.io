@@ -26,7 +26,7 @@ def get_all_posts(selected_profile):
         for post in posts_iterator:
             posts.append(post)
             if not posts_iterator.total_index % 12:
-                r=random.randint(5,20)
+                r=random.randint(0,0)
                 print(f'Posts list length is {len(posts)}, sleeping {r} seconds...')
                 sleep(r)
             if posts_iterator.total_index >= posts_limit: 
@@ -55,7 +55,7 @@ while len(top_posts_list) < num_followers:
         most_recent_post=max(all_posts, key=lambda post: post.date_local)
         if len(all_posts)<num_top_posts: #making sure there is more than 3 posts
             print(f"X {random_follower} not added to the list (not enought posts)")
-        elif most_recent_post.date_local >= (datetime.now() - timedelta(days=90)): #making sure the most recent posts is no older than 3 months
+        elif most_recent_post.date_local >= (datetime.now(most_recent_post.date_local.tzinfo) - timedelta(days=90)): #making sure the most recent posts is no older than 3 months
               print(f"The most recent post is older than 3 months. (ID: {most_recent_post.shortcode})")
               print(f"X {random_follower} not added to the list (last post too old)")
         else:
