@@ -47,23 +47,28 @@ top_posts_list=[]
 while len(top_posts_list) < num_followers:
     random_follower = random.choice(followers_list)
     print(f"Random follower is {random_follower}")
-    profile = Profile.from_username(L.context, random_follower)
-    if profile.is_private: #checking the profile is not private
-        print(f"X {random_follower} not added to the list (private profile)")
+    
+    try:
+        profile = Profile.from_username(L.context, random_follower)
+    except exceptions.ProfileNotExistsException:
+        print(f"X {random_follower} not added to the list (profile does not exist)")
     else:
-        all_posts = get_all_posts(profile) #retrieving the posts
-        most_recent_post=max(all_posts, key=lambda post: post.date_local)
-        if len(all_posts)<num_top_posts: #making sure there is more than 3 posts
-            print(f"X {random_follower} not added to the list (not enought posts)")
-        elif most_recent_post.date_local >= (datetime.now(most_recent_post.date_local.tzinfo) - timedelta(days=90)): #making sure the most recent posts is no older than 3 months
-              print(f"The most recent post is older than 3 months. (ID: {most_recent_post.shortcode})")
-              print(f"X {random_follower} not added to the list (last post too old)")
+        if profile.is_private: #checking the profile is not private
+            print(f"X {random_follower} not added to the list (private profile)")
         else:
-            posts_sorted_by_likes = sorted(all_posts,key=lambda p: p.likes + p.comments,reverse=True) #classifying the posts
-            posts_sorted_by_likes = [post for post in posts_sorted_by_likes if not post.is_video] #removing videos
-            top_posts_list.append(posts_sorted_by_likes[:3]) #taking top three
-            print(f"✓ {random_follower} added to the list")
-            
+            all_posts = get_all_posts(profile) #retrieving the posts
+            most_recent_post=max(all_posts, key=lambda post: post.date_local)
+            if len(all_posts)<num_top_posts: #making sure there is more than 3 posts
+                print(f"X {random_follower} not added to the list (not enought posts)")
+            elif most_recent_post.date_local >= (datetime.now(most_recent_post.date_local.tzinfo) - timedelta(days=90)): #making sure the most recent posts is no older than 3 months
+                print(f"The most recent post is older than 3 months. (ID: {most_recent_post.shortcode})")
+                print(f"X {random_follower} not added to the list (last post too old)")
+            else:
+                posts_sorted_by_likes = sorted(all_posts,key=lambda p: p.likes + p.comments,reverse=True) #classifying the posts
+                posts_sorted_by_likes = [post for post in posts_sorted_by_likes if not post.is_video] #removing videos
+                top_posts_list.append(posts_sorted_by_likes[:3]) #taking top three
+                print(f"✓ {random_follower} added to the list")
+                
 
 
 
