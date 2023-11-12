@@ -44,10 +44,7 @@ fetch('top_posts.json')
             postTableRow.appendChild(postTableCell); 
             
 
-          postTable.appendChild(postTableRow);
-          userDiv.appendChild(postTable);
-          userDiv.appendChild(document.createElement('hr'));
-          postTables.appendChild(userDiv);
+            postTables.appendChild(postTableRow);
         });
     })
 
