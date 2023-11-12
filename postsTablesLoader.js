@@ -6,53 +6,43 @@ fetch('top_posts.json')
         const postTables = document.getElementById('post-tables');
 
         // Iterate through the users and create HTML elements
-        data.users.forEach(user => {
-            const userDiv = document.createElement('div');
-            const usernameH2 = document.createElement('h2')
-            const usernameLink = document.createElement('a');
-            usernameLink.href = `https://www.instagram.com/${user.username}`;
-            usernameLink.target = '_blank';
-            usernameLink.textContent = user.username;
-            usernameH2.appendChild(usernameLink);
-            userDiv.appendChild(usernameH2);
-
+        data.posts.forEach(post => {
             
             const postTable = document.createElement('table');
             postTable.style.width = '100%';
             const postTableRow = document.createElement('tr');
 
-            user.postIDs.forEach(postID => {
-                const postTableCell = document.createElement('td');
+            
+            const postTableCell = document.createElement('td');
 
-                // Create a span element to contain "Post ID:" and ${postID}
-                const postTextSpan = document.createElement('span');
-                postTextSpan.style.display = 'inline'; // Set display to inline
-                postTextSpan.textContent = 'Post ID: ';
+            // Create a span element to contain "Post ID:" and ${post}
+            const postTextSpan = document.createElement('span');
+            postTextSpan.style.display = 'inline'; // Set display to inline
+            postTextSpan.textContent = 'Post ID: ';
 
-                // Create an anchor element for the clickable ${postID}
-                const postLink = document.createElement('a');
-                postLink.href = `https://www.instagram.com/p/${postID}`;
-                postLink.target = '_blank';
-                postLink.textContent = `${postID}`;
+            // Create an anchor element for the clickable ${post}
+            const postLink = document.createElement('a');
+            postLink.href = `https://www.instagram.com/p/${post}`;
+            postLink.target = '_blank';
+            postLink.textContent = `${post}`;
 
+            // Create the blockquote element
+            const blockquote = document.createElement('blockquote');
+            blockquote.setAttribute('style', 'width: 300px;');
+            blockquote.setAttribute('class', 'instagram-media');
+            blockquote.setAttribute('data-instgrm-version', '14');
+            blockquote.setAttribute('omitscript', 'true');
 
-                // Create the blockquote element
-                const blockquote = document.createElement('blockquote');
-                blockquote.setAttribute('style', 'width: 300px;');
-                blockquote.setAttribute('class', 'instagram-media');
-                blockquote.setAttribute('data-instgrm-version', '14');
-                blockquote.setAttribute('omitscript', 'true');
+            const blockquoteLink = document.createElement('a');
+            blockquoteLink.href = `https://www.instagram.com/p/${post}/`;
+            blockquote.appendChild(blockquoteLink);
 
-                const blockquoteLink = document.createElement('a');
-                blockquoteLink.href = `https://www.instagram.com/p/${postID}/`;
-                blockquote.appendChild(blockquoteLink);
-
-                // Append the postLink and blockquote to the postTableCell
-                postTextSpan.appendChild(postLink);
-                postTableCell.appendChild(postTextSpan);
-                postTableCell.appendChild(blockquote); // Append the blockquote element
-                postTableRow.appendChild(postTableCell); 
-            });
+            // Append the postLink and blockquote to the postTableCell
+            postTextSpan.appendChild(postLink);
+            postTableCell.appendChild(postTextSpan);
+            postTableCell.appendChild(blockquote); // Append the blockquote element
+            postTableRow.appendChild(postTableCell); 
+            
 
           postTable.appendChild(postTableRow);
           userDiv.appendChild(postTable);
